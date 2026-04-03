@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buy Tickets | The Knockout</title>
+
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicorn.png') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='tickets.css') }}">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<header>
+<h1>THE KNOCKOUT</h1>
+<p>Carlix Group Tournament Series</p>
+<a href="/admin" style="
+position:absolute;
+top:20px;
+right:20px;
+text-decoration:none;
+font-weight:600;
+color:black;
+width: 100px;
+">Admin</a>
+<a href="/" style="
+position:absolute;
+top:20px;
+left:20px;
+text-decoration:none;
+font-weight:600;
+color:black;
+">
+Back to Home
+</a>
+
+</header>
+
+
+<section class="ticket-container">
+<form id="ticketForm">
+
+<h2>Purchase Ticket</h2>
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="text" id="phone" placeholder="Phone Number" required>
+
+<input type="email" id="email" placeholder="Email Address" required>
+
+<select id="tournament">
+
+<option>FC26 Championship</option>
+<option>Pool Tournament</option>
+<option>Dance Knockout</option>
+
+</select>
+
+<p class="price">Ticket Price: <strong>KSh 200</strong></p>
+
+<button type="submit">Pay & Generate Ticket</button>
+
+</form>
+
+
+<div class="ticket-preview">
+
+<h3>Your Ticket</h3>
+
+<div class="ticket-card">
+
+<h2 id="ticketTournament"></h2>
+
+<p id="ticketName"></p>
+
+<p id="ticketID"></p>
+
+<p id="ticketPrice"></p>
+
+<div id="qrcode"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<div id="customAlert" class="alert-box">
+    <span id="alertMessage"></span>
+</div>
+
+<script src="{{ url_for('static', filename='tickets.js') }}"></script>
+</body>
+</html>

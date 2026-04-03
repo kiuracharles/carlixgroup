@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Carlix Scanner</title>
+
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicorn.png') }}">
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Inter', sans-serif;
+    background:#fffefe;
+    color:black;
+    text-align:center;
+}
+
+h1{
+    margin-top:20px;
+    font-weight:600;
+}
+
+#reader{
+    width:320px;
+    margin:30px auto;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+#overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    font-size:22px;
+    opacity:0;
+    pointer-events:none;
+    transition:0.4s ease;
+}
+
+#overlay.show{
+    opacity:1;
+    pointer-events: all;
+}
+
+.valid{
+    background:#a1cab7;
+}
+
+.used{
+    background:#dfd4b4;
+}
+
+.invalid{
+    background:#d1a4a8;
+}
+
+.card{
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:16px;
+    width:300px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    animation:scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn{
+    from{transform:scale(0.8); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+button{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:black;
+    color:white;
+    cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Carlix Scanner</h1>
+
+<div id="liveStats" style="
+background:#ffffff;
+padding:15px;
+margin:20px;
+border-radius:12px;
+font-size:14px;
+">
+    <p>Inside: <span id="inside">0</span></p>
+    <p>Total: <span id="total">0</span></p>
+    <p>Remaining: <span id="remaining">0</span></p>
+</div>
+
+<div id="reader"></div>
+
+<div id="overlay"></div>
+
+
+
+<!-- 🔊 Sounds -->
+<audio id="successSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="errorSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+<script>
+
+let scanning = true;
+let scannerInstance;
+
+// 🔥 SHOW OVERLAY
+function showOverlay(type, data){
+
+    const overlay = document.getElementById("overlay");
+
+    overlay.className = "show " + type;
+
+    let content = "";
+
+    if(type === "valid"){
+        document.getElementById("successSound").play();
+
+        content = `
+        <div class="card">
+            <h2>✅ ACCESS GRANTED</h2>
+            <p><strong>${data.name}</strong></p>
+            <p>${data.tournament}</p>
+            <p>M-Pesa: ${data.mpesa}</p>
+            <button onclick="closeOverlay()">OK</button>
+        </div>`;
+    }
+
+    else if(type === "used"){
+        document.getElementById("errorSound").play();
+
+        content = `
+        <div class="card">
+            <h2>⚠️ ALREADY USED</h2>
+            <p><strong>${data.name}</strong></p>
+            <p>${data.tournament}</p>
+            <p>M-Pesa: ${data.mpesa}</p>
+            <button onclick="closeOverlay()">OK</button>
+        </div>`;
+    }
+
+    else{
+        document.getElementById("errorSound").play();
+
+        content = `
+        <div class="card">
+            <h2>❌ INVALID TICKET</h2>
+            <button onclick="closeOverlay()">OK</button>
+        </div>`;
+    }
+
+    overlay.innerHTML = content;
+}
+
+
+// 🔥 FIXED CLOSE FUNCTION
+function closeOverlay(){
+
+    const overlay = document.getElementById("overlay");
+
+    overlay.classList.remove("show");
+
+    // 🔥 Clear content (IMPORTANT FIX)
+    setTimeout(() => {
+        overlay.innerHTML = "";
+        scanning = true;
+    }, 300);
+
+}
+
+
+// 🎯 SCAN HANDLER
+function onScanSuccess(decodedText){
+
+    if(!scanning) return;
+
+    scanning = false;
+
+    fetch("/verify-ticket", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({ qr: decodedText })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.status === "valid"){
+            showOverlay("valid", data);
+            updateStats();
+        }
+        else if(data.status === "used"){
+            showOverlay("used", data);
+        }
+        else{
+            showOverlay("invalid");
+        }
+
+    });
+
+}
+
+
+// 🚀 INIT SCANNER
+scannerInstance = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: 250 }
+);
+
+scannerInstance.render(onScanSuccess);
+
+// 🔥 FETCH LIVE STATS
+function updateStats(){
+
+    fetch("/api/stats")
+    .then(res => res.json())
+    .then(data => {
+
+        document.getElementById("inside").innerText = data.used || 0;
+        document.getElementById("total").innerText = data.total || 0;
+        document.getElementById("remaining").innerText = data.remaining || 0;
+
+    });
+
+}
+
+// 🔁 AUTO UPDATE EVERY 3 SECONDS
+setInterval(updateStats, 3000);
+
+// INITIAL LOAD
+updateStats();
+
+</script>
+
+</body>
+</html>

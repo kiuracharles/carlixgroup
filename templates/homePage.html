@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carlix Group | THE KNOCKOUT</title>
+
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicorn.png') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='homePage.css') }}">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">CARLIX</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="/tickets">Tickets</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h4>Carlix Group Presents</h4>
+
+<h1 class="gradient-text">THE KNOCKOUT</h1>
+
+<p>Ultimate Tournament Series</p>
+
+<div class="hero-buttons">
+
+    <a href="/tickets">
+        <button class="magnetic">Buy Tickets</button>
+    </a>
+
+
+</div>
+
+</div>
+
+<div class="hero-bg"></div>
+
+</section>
+
+
+
+<section class="tournaments">
+  <h2>Upcoming Tournaments</h2>
+  <div class="card-grid">
+
+    <div class="card">
+      <img src="{{ url_for('static', filename='Images/image2.png') }}" alt="FC26 Championship">
+      <h3>FC26 Championship</h3>
+      <p>May 17–19</p>
+      <a href="/tickets">
+        <button>Buy Tickets</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="{{ url_for('static', filename='Images/image1.jpg') }}" alt="Pool Tournament">
+      <h3>Pool Tournament</h3>
+      <p>June 7–9</p>
+      <a href="/tickets">
+        <button>Buy Tickets</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="{{ url_for('static', filename='Images/image3.jpg') }}" alt="Dance Tournament">
+      <h3>Dance Tournament</h3>
+      <p>June 21–23</p>
+      <a href="/tickets">
+        <button>Buy Tickets</button>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="newsletter">
+
+<h2>Get Ticket Alerts</h2>
+
+<input type="email" placeholder="Enter your email">
+
+<button>Subscribe</button>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 Carlix Group — THE KNOCKOUT</p>
+
+</footer>
+
+<script src="{{ url_for('static', filename='ticketing.js') }}"></script>
+
+</body>
+</html>

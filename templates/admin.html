@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | Carlix Group</title>
+
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicorn.png') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+    <h1>Carlix Admin Dashboard</h1>
+    <p>THE KNOCKOUT Control Panel</p>
+</header>
+
+<!-- ACTION BUTTONS -->
+<div class="actions">
+    <a href="/scanner" class="btn">QR Scanner</a>
+    <a href="/" class="btn logout">HomePage</a>
+</div>
+
+<!-- STATS -->
+<div class="dashboard">
+
+    <div class="card">
+        <h3>Total Tickets</h3>
+        <p id="totalTickets">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Revenue</h3>
+        <p id="revenue">KSh 0</p>
+    </div>
+
+    <div class="card">
+        <h3>Used</h3>
+        <p id="usedTickets">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Remaining</h3>
+        <p id="remainingTickets">0</p>
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<div class="card chart-card">
+    <h3>Tickets per Tournament</h3>
+    <canvas id="tournamentChart"></canvas>
+</div>
+
+<div class="card chart-card" id="chart-card2">
+    <h3>Revenue Distribution</h3>
+    <canvas id="revenueChart"></canvas>
+</div>
+
+<!-- SEARCH -->
+<input type="text" id="searchInput" placeholder="Search by name, ref, or tournament..." class="search-box">
+
+<!-- TABLE -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Tournament</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="ticketTable"></tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='admin.js') }}"></script>
+
+</body>
+</html>
