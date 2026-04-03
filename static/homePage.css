@@ -1,0 +1,204 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter, sans-serif;
+}
+
+body{
+background:white;
+color:#0A2540;
+overflow-x:hidden;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:20px 8%;
+background:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+z-index:100;
+}
+
+.logo{
+font-weight:700;
+font-size:22px;
+color:#2F80ED;
+}
+
+nav a{
+margin-left:30px;
+text-decoration:none;
+color:#0A2540;
+font-weight:500;
+}
+
+
+
+/* HERO */
+
+.hero{
+height:60vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.hero-content{
+z-index:2;
+}
+
+.hero h4{
+color:#646363;
+}
+
+.hero h1{
+font-size:80px;
+margin:15px 0;
+}
+
+.gradient-text{
+background:linear-gradient(90deg,#0A2540,#2F80ED);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero-buttons{
+margin-top:30px;
+}
+
+.hero button{
+padding:15px 35px;
+margin:10px;
+border:none;
+border-radius:8px;
+background:#2F80ED;
+color:white;
+cursor:pointer;
+transition:all .3s;
+}
+
+.hero button:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+
+
+/* HERO BACKGROUND */
+
+.hero-bg{
+position:absolute;
+width:150%;
+height:150%;
+background:radial-gradient(circle at center,#eaf3ff,white);
+animation:floatbg 20s infinite linear;
+z-index:1;
+}
+
+@keyframes floatbg{
+0%{transform:translateY(0)}
+50%{transform:translateY(-50px)}
+100%{transform:translateY(0)}
+}
+
+
+
+/* TOURNAMENTS */
+
+.tournaments{
+padding:20px 10%;
+text-align:center;
+}
+
+.card-grid{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+transition:transform .3s;
+transform-style:preserve-3d;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.card button{
+margin-top:15px;
+padding:10px 22px;
+border:none;
+border-radius:6px;
+background:#0A2540;
+color:white;
+cursor:pointer;
+}
+
+
+
+/* NEWSLETTER */
+
+.newsletter{
+padding:120px 10%;
+text-align:center;
+background:#f7f9fc;
+}
+
+.newsletter input{
+padding:14px;
+width:250px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.newsletter button{
+padding:14px 25px;
+background:#2F80ED;
+color:white;
+border:none;
+border-radius:6px;
+margin-left:10px;
+}
+
+
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:40px;
+color:#777;
+}
+
+
+
+/* SCROLL REVEAL */
+
+.hidden{
+opacity:0;
+transform:translateY(40px);
+transition:all 1s;
+}
+
+.show{
+opacity:1;
+transform:translateY(0);
+}

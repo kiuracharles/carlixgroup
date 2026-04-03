@@ -1,0 +1,163 @@
+/* GENERAL */
+body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background:#f5f7fb;
+}
+
+/* HEADER */
+header{
+    padding:20px;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    gap:10px;
+    padding:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#0056b3;
+}
+
+.logout{
+    background:#dc3545;
+}
+
+.logout:hover{
+    background:#a71d2a;
+}
+
+/* DASHBOARD GRID */
+.dashboard{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px;
+    padding:20px;
+}
+
+/* CARDS */
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+#chart-card2{
+    width: 50%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin:0 0 10px;
+}
+
+.card p{
+    font-size:20px;
+    font-weight:600;
+}
+
+/* CHART */
+.chart-card{
+    margin:20px;
+}
+
+/* TABLE */
+.table-container{
+    padding:20px;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+th, td{
+    padding:12px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+/* STATUS COLORS */
+.used{
+    color:green;
+    font-weight:600;
+}
+
+.unused{
+    color:orange;
+    font-weight:600;
+}
+
+.search-box{
+    margin:20px;
+    padding:10px;
+    width:90%;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+/* 📱 TABLET */
+@media (max-width:1024px){
+    .dashboard{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 📱 MOBILE */
+@media (max-width:600px){
+
+    header{
+        font-size:14px;
+    }
+
+    .dashboard{
+        grid-template-columns: 1fr;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    table{
+        font-size:12px;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+
+}
