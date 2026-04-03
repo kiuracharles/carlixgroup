@@ -1,0 +1,6 @@
+flask
+requests
+gunicorn
+qrcode
+pillow
+sib-api-v3-sdk

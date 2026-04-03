@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: carlix-group
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn server:app
